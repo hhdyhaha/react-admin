@@ -13,8 +13,8 @@ jobs:
         uses: actions/checkout@v4
       - name: 安装依赖和项目打包
         run: |
-          pnpm install
-          pnpm run build
+          npm install
+          npm run build
       - name: 部署
         uses: JamesIves/github-pages-deploy-action@v4
         with:
