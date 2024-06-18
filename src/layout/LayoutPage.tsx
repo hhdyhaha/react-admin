@@ -1,6 +1,6 @@
 import React from 'react';
 import {Layout, Menu, theme, ConfigProvider} from 'antd';
-import {RouterProvider, useNavigate} from "react-router-dom"
+import {useNavigate, useRoutes} from "react-router-dom"
 import routersList from "@/router/index.tsx"
 
 const {Header, Content, Footer} = Layout;
@@ -23,11 +23,17 @@ const App: React.FC = () => {
     const {
         token: {colorBgContainer, borderRadiusLG},
     } = theme.useToken();
-    // const navigate = useNavigate();
-    const clickMenuItem = (e) => {
-        console.log('e', e)
-        // navigate('/')
-    }
+    const navigate = useNavigate();
+
+    const clickMenuItem = (e: { key: string }) => {
+        const route = routersList.routes.find(route => route.id === e.key);
+        if (route && route.path) {
+            navigate(route.path);
+        } else {
+            navigate('/');
+        }
+    };
+    const element = useRoutes(routersList.routes);
     return (
         <ConfigProvider
             theme={{
@@ -59,7 +65,7 @@ const App: React.FC = () => {
                             borderRadius: borderRadiusLG,
                         }}
                     >
-                        <RouterProvider router={routersList}/>
+                        {element}
                     </div>
                 </Content>
                 <Footer style={{textAlign: 'center'}}>
