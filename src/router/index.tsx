@@ -1,6 +1,6 @@
 import {createHashRouter, Navigate} from "react-router-dom";
-import HomePage from '@/pages/Home/HomePage'
-import ErrorPage from '@/pages/Error/ErrorPage'
+import HomePage from '@/pages/home/HomePage'
+import ErrorPage from '@/pages/error/ErrorPage'
 import LayoutPage from '@/layout/LayoutPage'
 import HtmlPage from '@/pages/HtmlPage/HtmlPage'
 import CssPage from '@/pages/CssPage/CssPage'
