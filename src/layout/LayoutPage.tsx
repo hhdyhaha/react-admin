@@ -1,39 +1,62 @@
-import React from 'react';
+import React, {useEffect, useState, useRef} from 'react';
 import {Layout, Menu, theme, ConfigProvider} from 'antd';
-import {useNavigate, useRoutes} from "react-router-dom"
+import {useNavigate, Outlet} from "react-router-dom"
 import routersList from "@/router/index.tsx"
 
 const {Header, Content, Footer} = Layout;
-
-const items = routersList.routes.map((routeItem, index: number) => {
-    const itemDict: { [key: string]: string } = {
-        '/': '首页'
-    }
-    if (routeItem.path && routeItem.path !== '*') {
-        const menuDataItem = {
-            key: routeItem.id,
-            label: itemDict[routeItem.path],
-        }
-        return menuDataItem
-    }
-
-})
 
 const App: React.FC = () => {
     const {
         token: {colorBgContainer, borderRadiusLG},
     } = theme.useToken();
     const navigate = useNavigate();
+    const [menuItems, setMenuItems] = useState<{ key: string; label: string }[]>([]);
+    // 组件“记住”某些信息，但又不想让这些信息 触发新的渲染 时，你可以使用 ref
+    const routersListRef = useRef(routersList.routes);
+    useEffect(() => {
+        const itemDict: { [key: string]: string } = {
+            '/home': '首页',
+            '/html-page': 'Html',
+            '/css-page': 'Css',
+            '/js-page': 'Js',
+        }
+        const menuData = []
+        for (const routeItem of routersList.routes) {
+            // 如果/下的children存在
+            if (routeItem.children) {
+                for (const routeChildItem of routeItem.children) {
+                    if (routeChildItem.path) {
+                        const isHasPath = routeChildItem.path in itemDict;
+                        if (isHasPath) {
+                            const menuDataItem = {
+                                key: routeChildItem.id,
+                                label: itemDict[routeChildItem.path], // 确保有默认的label值
+                            };
+                            menuData.push(menuDataItem)
+                        }
+                    }
+                }
+            }
+        }
+        navigate('/home');
+        setMenuItems([...menuData]);
+    }, [routersListRef]) // [] 为空,只调用一次
 
+    /**
+     * 点击菜单,切换路由
+     * @param e 菜单的key和路由的children的id进行对比
+     */
     const clickMenuItem = (e: { key: string }) => {
-        const route = routersList.routes.find(route => route.id === e.key);
-        if (route && route.path) {
-            navigate(route.path);
-        } else {
-            navigate('/');
+        if (routersList.routes[0].children) {
+            const route = routersList.routes[0].children.find(route => route.id === e.key);
+            if (route && route.path) {
+                navigate(route.path);
+            } else {
+                navigate('/');
+            }
         }
     };
-    const element = useRoutes(routersList.routes);
+    // const element = useRoutes(routersList.routes);
     return (
         <ConfigProvider
             theme={{
@@ -50,8 +73,8 @@ const App: React.FC = () => {
                     <Menu
                         theme="light"
                         mode="horizontal"
-                        defaultSelectedKeys={['0']}
-                        items={items}
+                        defaultSelectedKeys={['0-0']}
+                        items={menuItems}
                         style={{flex: 1, minWidth: 0}}
                         onClick={clickMenuItem}
                     />
@@ -65,7 +88,8 @@ const App: React.FC = () => {
                             borderRadius: borderRadiusLG,
                         }}
                     >
-                        {element}
+                        {/*{element}*/}
+                        <Outlet/>
                     </div>
                 </Content>
                 <Footer style={{textAlign: 'center'}}>

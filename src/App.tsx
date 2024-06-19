@@ -1,15 +1,13 @@
-import LayoutPage from '@/layout/LayoutPage'
 import './styles/App.css'
 import './styles/Reset.css'
-import {BrowserRouter} from 'react-router-dom';
+import {RouterProvider} from 'react-router-dom';
+import routersList from "@/router/index.tsx"
 
 function App() {
     return (
         <>
             <div className="h-full">
-                <BrowserRouter>
-                    <LayoutPage/>
-                </BrowserRouter>
+                <RouterProvider router={routersList}/>
             </div>
         </>
     )
