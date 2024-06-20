@@ -8,6 +8,9 @@ import autoprefixer from 'autoprefixer'
 export default defineConfig({
   base: './',
   plugins: [react()],
+  server:{
+    host: '0.0.0.0',
+  },
   css: {
     postcss: {
       plugins: [
