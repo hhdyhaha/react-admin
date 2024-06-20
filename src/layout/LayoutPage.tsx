@@ -40,7 +40,7 @@ const App: React.FC = () => {
         }
         navigate('/home');
         setMenuItems([...menuData]);
-    }, [routersListRef]) // [] 为空,只调用一次
+    }, [routersListRef,navigate]) // [] 为空,只调用一次
 
     /**
      * 点击菜单,切换路由
@@ -56,7 +56,6 @@ const App: React.FC = () => {
             }
         }
     };
-    // const element = useRoutes(routersList.routes);
     return (
         <ConfigProvider
             theme={{
@@ -79,7 +78,7 @@ const App: React.FC = () => {
                         onClick={clickMenuItem}
                     />
                 </Header>
-                <Content style={{padding: '0 48px', margin: '16px 0'}}>
+                <Content style={{padding: '0 48px', margin: '16px 0'}} className="h-full">
                     <div
                         style={{
                             background: colorBgContainer,
@@ -87,8 +86,8 @@ const App: React.FC = () => {
                             padding: 24,
                             borderRadius: borderRadiusLG,
                         }}
+                        className="h-full"
                     >
-                        {/*{element}*/}
                         <Outlet/>
                     </div>
                 </Content>
