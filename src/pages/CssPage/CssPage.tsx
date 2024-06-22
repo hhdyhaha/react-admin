@@ -1,20 +1,24 @@
 import CommonTabs from "@/components/CommonTabs.tsx";
 import {App} from 'antd';
+import cssContext from '@/store/cssContext.tsx';
+
 
 function CssPage() {
     const items = new Array(3).fill(null).map((_, i) => {
         const id = String(i);
         return {
-            label: `标签-${id}`,
+            label: `context 标签-${id}`,
             key: id,
             disabled: i === 28,
-            children: `标签内容 ${id}`,
+            children: `context 标签内容 ${id}`,
         };
     })
     return (
         <div>
             <App>
-                <CommonTabs propTabsList={items} argTypes='2'/>
+                <cssContext.Provider value={{'cssPropTabsList': items, cssArgTypes: '2'}}>
+                    <CommonTabs/>
+                </cssContext.Provider>
             </App>
             我是css页面
         </div>

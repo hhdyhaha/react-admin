@@ -1,9 +1,10 @@
-import {useState, useEffect} from 'react';
+import {useState, useEffect, useContext, useRef} from 'react';
 import {Tabs, App} from 'antd';
+import cssContext from '@/store/cssContext.tsx';
 
 // 定义props传递过来的ts类型
 interface CommonTabsProps {
-    propTabsList: {
+    propTabsList?: {
         label: string;
         key: string;
         disabled?: boolean;
@@ -19,20 +20,40 @@ interface CommonTabsProps {
  */
 function CommonTabs({propTabsList = [], argTypes = '0'}: CommonTabsProps) {
     const [tabsList, setTabsList] = useState<CommonTabsProps['propTabsList']>([]);
-    const { message } = App.useApp();
+    const {message} = App.useApp();
+
+    // context传参的数据
+    const cssCt = useContext(cssContext)
+    // const cssPropTabsList= useRef<CommonTabsProps['propTabsList']>(cssCt.cssPropTabsList)
+    let cssPropTabsList: CommonTabsProps['propTabsList'] = [];
+    if (cssCt.cssPropTabsList) {
+        cssPropTabsList = cssCt.cssPropTabsList
+    }
+    // ref.current 属性访问该 ref 的当前值
+    const cssArgTypes = useRef<string>('0')
 
     useEffect(() => {
+        if (cssCt.cssArgTypes) {
+            cssArgTypes.current = cssCt.cssArgTypes
+        }
         if (argTypes === '1') {
+            /**
+             * useState Hook 提供了这两个功能：
+             * State 变量 用于保存渲染间的数据。
+             * State setter 函数 更新变量并触发 React 再次渲染组件。
+             */
             setTabsList([...propTabsList])
             message.success('Props传参')
-        }else if(argTypes === '2'){
-            setTabsList([...propTabsList])
+        }
+        if (cssArgTypes.current === '2') {
+            setTabsList([...cssPropTabsList])
             message.success('context传参')
-        }else if(argTypes === '3'){
+        }
+        if (argTypes === '3') {
             setTabsList([...propTabsList])
             message.success('Redux传参')
         }
-    }, [propTabsList, argTypes,message])
+    }, [])
 
     return (
         <div>

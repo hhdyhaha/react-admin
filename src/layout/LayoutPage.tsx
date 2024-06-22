@@ -12,7 +12,7 @@ const App: React.FC = () => {
     const navigate = useNavigate();
     const [menuItems, setMenuItems] = useState<{ key: string; label: string }[]>([]);
     // 组件“记住”某些信息，但又不想让这些信息 触发新的渲染 时，你可以使用 ref
-    const routersListRef = useRef(routersList.routes);
+    // const routersListRef = useRef(routersList.routes);
     useEffect(() => {
         const itemDict: { [key: string]: string } = {
             '/home': '首页',
@@ -40,7 +40,7 @@ const App: React.FC = () => {
         }
         navigate('/home');
         setMenuItems([...menuData]);
-    }, [routersListRef,navigate]) // [] 为空,只调用一次
+    }, []) // [] 为空,只调用一次
 
     /**
      * 点击菜单,切换路由
