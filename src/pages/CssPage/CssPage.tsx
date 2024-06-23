@@ -1,6 +1,6 @@
 import CommonTabs from "@/components/CommonTabs.tsx";
 import {App} from 'antd';
-import cssContext from '@/store/cssContext.tsx';
+import cssContext from '@/store/cssContext.ts';
 
 
 function CssPage() {

@@ -1,6 +1,6 @@
 import {useState, useEffect, useContext, useRef} from 'react';
 import {Tabs, App} from 'antd';
-import cssContext from '@/store/cssContext.tsx';
+import cssContext from '@/store/cssContext.ts';
 
 // 定义props传递过来的ts类型
 interface CommonTabsProps {
