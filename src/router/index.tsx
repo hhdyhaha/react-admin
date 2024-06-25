@@ -16,16 +16,16 @@ const routersList = createHashRouter([
                 element: <HomePage/>
             },
             {
-                path:'/html-page',
+                path: '/html-page',
                 element: <HtmlPage/>
             },
             {
-                path:'/css-page',
+                path: '/css-page',
                 element: <CssPage/>
             },
             {
-                path:'/js-page',
-                element: <JsPage/>
+                path: '/js-page',
+                element: <JsPage/>,
             },
             {
                 path: '/',

@@ -1,6 +1,11 @@
 import {useState, useEffect, useContext, useRef} from 'react';
 import {Tabs, App} from 'antd';
 import cssContext from '@/store/cssContext.ts';
+import {useSelector, useDispatch} from 'react-redux';
+// import {useSelector} from 'react-redux';
+import {useLocation} from 'react-router-dom';
+import {setItems} from "@/pages/JsPage/jsPageSlice.ts";
+// import {setItems} from "@/pages/JsPage/jsPageSlice.ts";
 
 // 定义props传递过来的ts类型
 interface CommonTabsProps {
@@ -24,19 +29,27 @@ function CommonTabs({propTabsList = [], argTypes = '0'}: CommonTabsProps) {
 
     // context传参的数据
     const cssCt = useContext(cssContext)
-    // const cssPropTabsList= useRef<CommonTabsProps['propTabsList']>(cssCt.cssPropTabsList)
     let cssPropTabsList: CommonTabsProps['propTabsList'] = [];
     if (cssCt.cssPropTabsList) {
         cssPropTabsList = cssCt.cssPropTabsList
     }
     // ref.current 属性访问该 ref 的当前值
     const cssArgTypes = useRef<string>('0')
+    if (cssCt.cssArgTypes) {
+        cssArgTypes.current = cssCt.cssArgTypes
+    }
+
+    // redux传的数据
+    const ReduxTabsList = useSelector((state) => state.jsPage.items);
+    const reduxArgTypes = useSelector((state) => state.jsPage.argTypes);
+
+    const dispatch = useDispatch();
+
+    // 当前路由
+    const location = useLocation();
 
     useEffect(() => {
-        if (cssCt.cssArgTypes) {
-            cssArgTypes.current = cssCt.cssArgTypes
-        }
-        if (argTypes === '1') {
+        if (argTypes === '1' && location.pathname === '/html-page') {
             /**
              * useState Hook 提供了这两个功能：
              * State 变量 用于保存渲染间的数据。
@@ -45,15 +58,21 @@ function CommonTabs({propTabsList = [], argTypes = '0'}: CommonTabsProps) {
             setTabsList([...propTabsList])
             message.success('Props传参')
         }
-        if (cssArgTypes.current === '2') {
+        if (cssArgTypes.current === '2' && location.pathname === '/css-page') {
             setTabsList([...cssPropTabsList])
             message.success('context传参')
         }
-        if (argTypes === '3') {
-            setTabsList([...propTabsList])
+        if (reduxArgTypes === '3' && location.pathname === '/js-page') {
+            setTabsList([...ReduxTabsList])
             message.success('Redux传参')
         }
     }, [])
+
+    function handleTab(key: string, event) {
+        // console.log('key', key)
+        // console.log('event', event)
+        dispatch(setItems({'activeTab': key}))
+    }
 
     return (
         <div>
@@ -62,6 +81,7 @@ function CommonTabs({propTabsList = [], argTypes = '0'}: CommonTabsProps) {
                 tabPosition="top"
                 style={{height: 220}}
                 items={tabsList}
+                onTabClick={handleTab}
             />
         </div>
     );

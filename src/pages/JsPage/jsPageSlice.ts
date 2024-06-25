@@ -1,20 +1,27 @@
 // src/features/counter/counterSlice.js
 import { createSlice } from '@reduxjs/toolkit';
+const tabsContent:string[] = ['防抖节流','深拷贝,浅拷贝']
 
-const initialState = {
-    items: new Array(3).fill(null).map((_, i) => {
+interface initItem{
+    items:{label:string,key:string}[],
+    argTypes:string,
+    activeTab:string
+}
+const initialState:initItem = {
+    items: new Array(tabsContent.length).fill(null).map((_, i) => {
         const id = String(i);
         return {
-            label: `Redux 标签-${id}`,
+            label: `${tabsContent[i]}`,
             key: id,
-            disabled: i === 28,
-            children: `Redux 标签内容 ${id}`,
+            // children: 'haha', // 选项卡头显示内容
         };
-    })
+    }),
+    argTypes:'3',
+    activeTab: '0'
 };
 
 export const jsPageSlice = createSlice({
-    name: 'jsPage1',
+    name: 'jsPage', // dispatch的时候自动拼接的type值
     initialState,
     reducers: {
         // state 初始化的值是initialState action 的值是 type 和 data
@@ -25,9 +32,7 @@ export const jsPageSlice = createSlice({
          * 因此，"counter" 名称 + "increment" reducer 函数生成了一个 action 类型 {type: "counter/increment"}。（毕竟，如果计算机可以为我们做，为什么要手写！）
          */
         setItems: (state, action) => {
-            console.log('state',state)
-            console.log('action',action)
-            // state.items = action.payload;
+            state.activeTab = action.payload.activeTab
         },
     },
 });
