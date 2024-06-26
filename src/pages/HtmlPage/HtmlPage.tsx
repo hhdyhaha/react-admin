@@ -8,7 +8,7 @@ function HtmlPage() {
             label: `Props 标签-${id}`,
             key: id,
             disabled: i === 28,
-            children: `Props 标签内容 ${id}`,
+            // children: `Props 标签内容 ${id}`,
         };
     })
     return (

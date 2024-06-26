@@ -5,7 +5,7 @@ interface CommonTabsProps {
         label: string;
         key: string;
         disabled?: boolean;
-        children: string;
+        children?: string;
     }[];
     cssArgTypes?: string;
 }

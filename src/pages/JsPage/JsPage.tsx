@@ -5,6 +5,7 @@ import {App} from 'antd';
 import {useSelector} from 'react-redux';
 import AntiShake from '@/pages/JsPage/TabViews/AntiShake/AntiShake'
 import CopyPage from "@/pages/JsPage/TabViews/CopyPage/CopyPage.tsx";
+import JsControl from "@/pages/JsPage/TabViews/JsControl/JsControl.tsx";
 import React from "react";
 /**
  * 根据reduxActiveTab的值来判断不同的页面
@@ -12,8 +13,9 @@ import React from "react";
  */
 function ActiveItem() {
     const tabsDict:{ [key: string]: React.JSX.Element } = {
-        '0': <AntiShake/>,
-        '1': <CopyPage/>
+        '0': <JsControl/>,
+        '1': <AntiShake/>,
+        '2': <CopyPage/>
     }
     const reduxActiveTab = useSelector((state) => state.jsPage.activeTab);
     // 添加默认值处理或错误边界
@@ -28,7 +30,7 @@ function JsPage() {
     //     dispatch(setItems({1: '1', 2: '2'}));
     // }
     return (
-        <div>
+        <div className='h-full'>
             <App>
                 <CommonTabs/>
             </App>

@@ -13,7 +13,7 @@ interface CommonTabsProps {
         label: string;
         key: string;
         disabled?: boolean;
-        children: string;
+        children?: string;
     }[];
     argTypes?: string;
 }
@@ -79,7 +79,7 @@ function CommonTabs({propTabsList = [], argTypes = '0'}: CommonTabsProps) {
             <Tabs
                 defaultActiveKey="1"
                 tabPosition="top"
-                style={{height: 220}}
+                style={{height: 66}}
                 items={tabsList}
                 onTabClick={handleTab}
             />

@@ -1,15 +1,13 @@
 // src/features/counter/counterSlice.js
-import {createSlice} from '@reduxjs/toolkit';
+import { createSlice } from '@reduxjs/toolkit';
+const tabsContent:string[] = ['js数组操作','防抖节流','深拷贝,浅拷贝','promise','基础算法','new操作符','apply,call,bind','原型链']
 
-const tabsContent: string[] = ['防抖节流', '深拷贝,浅拷贝', 'promise', '基础算法', 'new操作符', 'apply,call,bind', '原型链']
-
-interface initItem {
-    items: { label: string, key: string }[],
-    argTypes: string,
-    activeTab: string
+interface initItem{
+    items:{label:string,key:string}[],
+    argTypes:string,
+    activeTab:string
 }
-
-const initialState: initItem = {
+const initialState:initItem = {
     items: new Array(tabsContent.length).fill(null).map((_, i) => {
         const id = String(i);
         return {
@@ -18,7 +16,7 @@ const initialState: initItem = {
             // children: 'haha', // 选项卡头显示内容
         };
     }),
-    argTypes: '3',
+    argTypes:'3',
     activeTab: '0'
 };
 
@@ -39,5 +37,5 @@ export const jsPageSlice = createSlice({
     },
 });
 
-export const {setItems} = jsPageSlice.actions;
+export const { setItems } = jsPageSlice.actions;
 export default jsPageSlice.reducer;

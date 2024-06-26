@@ -10,7 +10,7 @@ function CssPage() {
             label: `context 标签-${id}`,
             key: id,
             disabled: i === 28,
-            children: `context 标签内容 ${id}`,
+            // children: `context 标签内容 ${id}`,
         };
     })
     return (
