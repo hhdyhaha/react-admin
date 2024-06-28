@@ -17,6 +17,7 @@ function ChangeArray({oldArr, updateOldArr}) {
             title: '方法',
             dataIndex: 'methods',
             key: 'methods',
+            width: '30%',
             render: (_, text) => (
                 <Space size="middle">
                     <span>{text.methods}</span>
@@ -28,11 +29,13 @@ function ChangeArray({oldArr, updateOldArr}) {
             title: '操作',
             dataIndex: 'info',
             key: 'age',
+            width: '30%',
         },
         {
             title: '是否返回值',
             dataIndex: 'isReturn',
             key: 'address',
+            width: '30%',
         }
     ];
 
@@ -92,7 +95,7 @@ function ChangeArray({oldArr, updateOldArr}) {
         <div className='h-1/3 mt-5 mb-5'>
             <h2 className='text-left'>改变数组操作的方法</h2>
             <div className="h-1.5">
-                <Table columns={columns} dataSource={tableData}/>
+                <Table columns={columns} dataSource={tableData} scroll={{x:'90vw',y:'16vh'}}/>
             </div>
         </div>
     )
