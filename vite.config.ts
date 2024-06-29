@@ -10,6 +10,13 @@ export default defineConfig({
   plugins: [react()],
   server:{
     host: '0.0.0.0',
+    proxy: {
+      '/api': {
+        target: 'https://fe.ecool.fun',
+        changeOrigin: true,
+        rewrite: (path) => path.replace(/^\/api/, '')
+      }
+    }
   },
   css: {
     postcss: {

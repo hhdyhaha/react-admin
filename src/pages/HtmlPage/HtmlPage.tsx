@@ -1,4 +1,5 @@
 import CommonTabs from "@/components/CommonTabs.tsx";
+import CommonTable from "@/components/CommonTable.tsx";
 import {App} from 'antd';
 
 function HtmlPage() {
@@ -16,7 +17,7 @@ function HtmlPage() {
             <App>
                 <CommonTabs propTabsList={items} argTypes='1'/>
             </App>
-            我是html页面
+            <CommonTable />
         </div>
     )
 }
