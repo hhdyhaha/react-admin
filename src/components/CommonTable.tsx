@@ -13,7 +13,7 @@ function CommonTable() {
             order: 'desc',
         };
 
-        axios.get('/api/api/exercise/list', {params}).then(res => {
+        axios.get('/api', {params}).then(res => {
             console.log(res.data);
         })
     }

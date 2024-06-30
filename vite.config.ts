@@ -12,7 +12,7 @@ export default defineConfig({
     host: '0.0.0.0',
     proxy: {
       '/api': {
-        target: 'https://fe.ecool.fun',
+        target: 'https://mock.apipark.cn/m2/4741023-4393839-default/188965246',
         changeOrigin: true,
         rewrite: (path) => path.replace(/^\/api/, '')
       }
