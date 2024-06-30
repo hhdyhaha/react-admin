@@ -13,7 +13,7 @@ function CommonTable() {
             order: 'desc',
         };
 
-        axios.get('/api', {params}).then(res => {
+        axios.get('https://mock.apipark.cn/m2/4741023-4393839-default/188965246', {params}).then(res => {
             console.log(res.data);
         })
     }
