@@ -1,6 +1,6 @@
 import axios from "axios";
 import { useState, useEffect } from "react";
-import { Table } from "antd";
+import { Table, Spin } from "antd";
 
 function CommonTable() {
     const [dataSource, setDataSource] = useState([]);
@@ -9,12 +9,17 @@ function CommonTable() {
         current: 1,
         pageSize: 10,
     });
+    const [loading, setLoading] = useState(true); // 新增loading状态
 
     const columns = [
         {
-            title: '分类',
-            dataIndex: 'category',
-            key: 'category',
+            title: '题号',
+            dataIndex: 'index',
+            key: 'index',
+            render: (text, record, index) => {
+                // 根据当前页和页大小计算序号
+                return (pagination.current - 1) * pagination.pageSize + index + 1;
+            },
         },
         {
             title: '标题',
@@ -40,6 +45,7 @@ function CommonTable() {
 
     // 发送ajax请求获取数据
     function getData(page = 1, pageSize = 10) {
+        setLoading(true); // 请求开始前设置loading状态
         const params = {
             vid: 9,
             tagId: 12,
@@ -60,6 +66,8 @@ function CommonTable() {
                 pageSize: pageSize,
                 total: totalCount,
             });
+        }).finally(() => {
+            setLoading(false); // 请求结束后设置loading状态
         });
     }
 
@@ -73,14 +81,19 @@ function CommonTable() {
 
     return (
         <div>
-            <Table
-                dataSource={dataSource}
-                columns={columns}
-                rowKey="exerciseKey"
-                pagination={pagination}
-                onChange={handleTableChange}
-                size='middle'
-            />
+            <Spin spinning={loading}>
+                <Table
+                    dataSource={dataSource}
+                    columns={columns}
+                    rowKey="exerciseKey"
+                    pagination={{
+                        ...pagination,
+                        position: ["bottomCenter"], // 中心位置
+                    }}
+                    onChange={handleTableChange}
+                    size='middle'
+                />
+            </Spin>
         </div>
     );
 }
