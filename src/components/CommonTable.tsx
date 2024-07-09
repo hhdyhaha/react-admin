@@ -1,9 +1,15 @@
 import axios from "axios";
-import {useState, useEffect} from "react";
-import {Table} from "antd";
+import { useState, useEffect } from "react";
+import { Table } from "antd";
 
 function CommonTable() {
-    const [dataSource, setDataSource] = useState([])
+    const [dataSource, setDataSource] = useState([]);
+    const [totalCount, setTotalCount] = useState(0);
+    const [pagination, setPagination] = useState({
+        current: 1,
+        pageSize: 10,
+    });
+
     const columns = [
         {
             title: '分类',
@@ -32,35 +38,50 @@ function CommonTable() {
         },
     ];
 
-
     // 发送ajax请求获取数据
-    function getData() {
+    function getData(page = 1, pageSize = 10) {
         const params = {
             vid: 9,
             tagId: 12,
-            pageNum: 1,
-            pageSize: 10,
+            pageNum: page,
+            pageSize: pageSize,
             orderBy: 'updateTime',
             order: 'desc',
         };
 
-        axios.get('https://mock.apipark.cn/m2/4741023-4393839-default/188965246', {params}).then(res => {
+        axios.get('https://mock.apipark.cn/m2/4741023-4393839-default/188965246', { params }).then(res => {
             // 题目列表
-            const questionlist = res.data.data.list
-            console.log('questionlist', questionlist)
-            setDataSource(questionlist)
-        })
+            const questionlist = res.data.data.list;
+            const totalCount = res.data.data.totalCount;
+            setTotalCount(totalCount);
+            setDataSource(questionlist);
+            setPagination({
+                current: page,
+                pageSize: pageSize,
+                total: totalCount,
+            });
+        });
     }
 
     useEffect(() => {
         getData();
     }, []);
+
+    const handleTableChange = (pagination) => {
+        getData(pagination.current, pagination.pageSize);
+    };
+
     return (
         <div>
-            <Table dataSource={dataSource} columns={columns} rowKey="exerciseKey" size='middle'/>
+            <Table
+                dataSource={dataSource}
+                columns={columns}
+                rowKey="exerciseKey"
+                pagination={pagination}
+                onChange={handleTableChange}
+                size='middle'
+            />
         </div>
-
-
     );
 }
 
