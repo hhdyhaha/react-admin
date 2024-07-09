@@ -57,7 +57,7 @@ function CommonTable() {
     }, []);
     return (
         <div>
-            <Table dataSource={dataSource} columns={columns} rowKey="exerciseKey"/>;
+            <Table dataSource={dataSource} columns={columns} rowKey="exerciseKey" size='middle'/>
         </div>
 
 
