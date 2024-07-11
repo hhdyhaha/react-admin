@@ -1,7 +1,8 @@
 import React, {useEffect, useState} from 'react';
-import {Layout, Menu, theme, ConfigProvider} from 'antd';
+import {Layout, Menu, theme, ConfigProvider, FloatButton} from 'antd';
 import {useNavigate, Outlet} from "react-router-dom"
 import routersList from "@/router/index.tsx"
+import CommonModal from "@/components/CommonModal.tsx";
 
 const {Header, Content, Footer} = Layout;
 
@@ -11,6 +12,8 @@ const App: React.FC = () => {
     } = theme.useToken();
     const navigate = useNavigate();
     const [menuItems, setMenuItems] = useState<{ key: string; label: string }[]>([]);
+    // 控制floatButton点击之后显示弹窗的布尔值
+    const [showFloatButton, setShowFloatButton] = useState(false);
     // 组件“记住”某些信息，但又不想让这些信息 触发新的渲染 时，你可以使用 ref
     // const routersListRef = useRef(routersList.routes);
     useEffect(() => {
@@ -56,6 +59,10 @@ const App: React.FC = () => {
             }
         }
     };
+
+    function handleFloatButton() {
+        console.log('点击了悬浮按钮');
+    }
     return (
         <ConfigProvider
             theme={{
@@ -89,6 +96,7 @@ const App: React.FC = () => {
                         className="h-full"
                     >
                         <Outlet/>
+                        <CommonModal/>
                     </div>
                 </Content>
                 <Footer style={{textAlign: 'center'}}>
