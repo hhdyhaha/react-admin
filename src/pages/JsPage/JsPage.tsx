@@ -3,7 +3,7 @@ import CommonTabs from "@/components/CommonTabs.tsx";
 import {App} from 'antd';
 // import {setItems} from "@/pages/JsPage/jsPageSlice.ts";
 import {useSelector} from 'react-redux';
-import AntiShake from '@/pages/JsPage/TabViews/AntiShake/AntiShake'
+import DebounceThrottle from '@/pages/JsPage/TabViews/DebounceThrottle/DebounceThrottle.tsx'
 import CopyPage from "@/pages/JsPage/TabViews/CopyPage/CopyPage.tsx";
 import JsControl from "@/pages/JsPage/TabViews/JsControl/JsControl.tsx";
 import NewOperator from "@/pages/JsPage/TabViews/NewOperator/NewOperator.tsx";
@@ -15,7 +15,7 @@ import React from "react";
 function ActiveItem() {
     const tabsDict:{ [key: string]: React.JSX.Element } = {
         '0': <JsControl/>,
-        '1': <AntiShake/>,
+        '1': <DebounceThrottle/>,
         '2': <CopyPage/>,
         '5': <NewOperator/>
     }
