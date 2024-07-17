@@ -1,4 +1,12 @@
 function CopyPage() {
+    const a = {
+        name: '张三',
+        age: 18,
+        classes: {
+            clsName: '第一小学',
+            clsId: 1
+        }
+    }
     // 深拷贝
     function deepCopy(obj:object, hash = new WeakMap()) {
         // 将对象放入 WeakMap 之前检查它是否是一个对象
