@@ -19,7 +19,7 @@ function CommonModal() {
     };
 
     return (
-        <div className="h-full">
+        <div>
             <FloatButton
                 className="mb-16 mr-12"
                 icon={<RobotOutlined/>}
