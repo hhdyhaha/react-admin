@@ -7,6 +7,23 @@ function CopyPage() {
             clsId: 1
         }
     }
+
+    // 浅拷贝
+    function shallowCopy(obj) {
+        const newObj = {};
+        for (var key in obj) {
+            if (obj.hasOwnProperty(key)) {
+                newObj[key] = obj[key];
+            }
+        }
+        return newObj;
+    }
+
+    const b = shallowCopy(a);
+    b.classes.clsName = '第二小学';
+    console.log('浅拷贝', b);
+    console.log('浅拷贝', a);
+
     // 深拷贝
     function deepCopy(obj:object, hash = new WeakMap()) {
         // 将对象放入 WeakMap 之前检查它是否是一个对象

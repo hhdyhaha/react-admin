@@ -6,6 +6,7 @@ import {useSelector} from 'react-redux';
 import DebounceThrottle from '@/pages/JsPage/TabViews/DebounceThrottle/DebounceThrottle.tsx'
 import CopyPage from "@/pages/JsPage/TabViews/CopyPage/CopyPage.tsx";
 import JsControl from "@/pages/JsPage/TabViews/JsControl/JsControl.tsx";
+import PromiseControl from "@/pages/JsPage/TabViews/PromiseControl/PromiseControl.tsx";
 import NewOperator from "@/pages/JsPage/TabViews/NewOperator/NewOperator.tsx";
 import React from "react";
 /**
@@ -17,6 +18,7 @@ function ActiveItem() {
         '0': <JsControl/>,
         '1': <DebounceThrottle/>,
         '2': <CopyPage/>,
+        '3': <PromiseControl/>,
         '5': <NewOperator/>
     }
     const reduxActiveTab = useSelector((state) => state.jsPage.activeTab);
