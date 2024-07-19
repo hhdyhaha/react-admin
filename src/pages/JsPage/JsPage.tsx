@@ -8,6 +8,7 @@ import CopyPage from "@/pages/JsPage/TabViews/CopyPage/CopyPage.tsx";
 import JsControl from "@/pages/JsPage/TabViews/JsControl/JsControl.tsx";
 import PromiseControl from "@/pages/JsPage/TabViews/PromiseControl/PromiseControl.tsx";
 import NewOperator from "@/pages/JsPage/TabViews/NewOperator/NewOperator.tsx";
+import CallApplyBind from "@/pages/JsPage/TabViews/CallApplyBind/CallApplyBind.tsx";
 import React from "react";
 /**
  * 根据reduxActiveTab的值来判断不同的页面
@@ -19,7 +20,8 @@ function ActiveItem() {
         '1': <DebounceThrottle/>,
         '2': <CopyPage/>,
         '3': <PromiseControl/>,
-        '5': <NewOperator/>
+        '5': <NewOperator/>,
+        '6': <CallApplyBind/>
     }
     const reduxActiveTab = useSelector((state) => state.jsPage.activeTab);
     // 添加默认值处理或错误边界
