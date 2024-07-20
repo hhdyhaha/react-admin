@@ -32,7 +32,7 @@ function CommonModal({ isModalOpen, setIsModalOpen, text }) {
                 }
             };
 
-            const response = await fetch(`${import.meta.env.VITE_API_URL}/api/v1/services/aigc/text-generation/generation`, {
+            const response = await fetch(`${import.meta.env.VITE_API_URL}/v1/services/aigc/text-generation/generation`, {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
