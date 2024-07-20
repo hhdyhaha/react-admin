@@ -96,7 +96,7 @@ const App: React.FC = () => {
                         className="h-full"
                     >
                         <Outlet/>
-                        <CommonModal/>
+                        {/*<CommonModal/>*/}
                     </div>
                 </Content>
                 <Footer style={{textAlign: 'center'}}>

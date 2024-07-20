@@ -1,6 +1,8 @@
+import { Modal, Button } from 'antd';
 import axios from "axios";
 import { useState, useEffect } from "react";
 import { Table, Spin } from "antd";
+import CommonModal from "@/components/CommonModal.tsx";
 
 function CommonTable() {
     const [dataSource, setDataSource] = useState([]);
@@ -9,7 +11,20 @@ function CommonTable() {
         current: 1,
         pageSize: 10,
     });
-    const [loading, setLoading] = useState(true); // 新增loading状态
+    const [loading, setLoading] = useState(true);
+    const [modalVisible, setModalVisible] = useState({});  // 使用一个对象来跟踪每行的模态对话框状态
+
+    const showModal = (key) => {
+        setModalVisible(prev => ({ ...prev, [key]: true }));
+    };
+
+    const handleOk = (key) => {
+        setModalVisible(prev => ({ ...prev, [key]: false }));
+    };
+
+    const handleCancel = (key) => {
+        setModalVisible(prev => ({ ...prev, [key]: false }));
+    };
 
     const columns = [
         {
@@ -40,6 +55,25 @@ function CommonTable() {
                 // 假设日期是ISO格式，这里使用toLocaleString()进行格式化，也可以用moment.js等库
                 return new Date(text).toLocaleString();
             }
+        },
+        {
+            title: '操作',
+            key: 'action',
+            render: (_, record) => (
+                <div>
+                    <Button type="primary" onClick={() => showModal(record.exerciseKey)}>
+                        点击查询答案
+                    </Button>
+                    {modalVisible[record.exerciseKey] && (
+                        <CommonModal
+                            isModalOpen={modalVisible[record.exerciseKey]}
+                            setIsModalOpen={() => handleOk(record.exerciseKey)}
+                            handleCancel={() => handleCancel(record.exerciseKey)}
+                            text={record}
+                        />
+                    )}
+                </div>
+            ),
         },
     ];
 
