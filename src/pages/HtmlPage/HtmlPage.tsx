@@ -14,9 +14,6 @@ function HtmlPage() {
     })
     return (
         <div>
-            <App>
-                <CommonTabs propTabsList={items} argTypes='1'/>
-            </App>
             <CommonTable />
         </div>
     )

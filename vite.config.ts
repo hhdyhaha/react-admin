@@ -9,7 +9,15 @@ export default defineConfig({
   base: './',
   plugins: [react()],
   server:{
-    host: '0.0.0.0'
+    host: '0.0.0.0',
+    proxy: {
+      '/api': {
+        target: 'https://dashscope.aliyuncs.com/',
+        changeOrigin: true,
+        secure:false,
+        rewrite: (path) => path.replace(/^\/api/, ''),
+      },
+    },
   },
   css: {
     postcss: {
