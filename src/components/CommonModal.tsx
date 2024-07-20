@@ -32,7 +32,7 @@ function CommonModal({ isModalOpen, setIsModalOpen, text }) {
                 }
             };
 
-            const response = await fetch('/api/api/v1/services/aigc/text-generation/generation', {
+            const response = await fetch(`${import.meta.env.VITE_API_URL}/api/v1/services/aigc/text-generation/generation`, {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
@@ -59,7 +59,7 @@ function CommonModal({ isModalOpen, setIsModalOpen, text }) {
                 <div className="h-96">
                     <ProChat
                         helloMessage={
-                            '欢迎使用 ProChat ，我是你的专属机器人，这是我们的 Github：[ProChat](https://github.com/ant-design/pro-chat)'
+                            '欢迎使用!'
                         }
                         request={async (messages) => {
                             const mockedData: string = await fetchChatResponse(messages[messages.length - 1].content);
