@@ -11,15 +11,35 @@ function CommonModal({ isModalOpen, setIsModalOpen, text }) {
         setIsModalOpen(false);
     };
 
-    // Function to copy text to clipboard and show a message
-    const copyToClipboard = async (textToCopy) => {
+    const copyToClipboardFallback = (textToCopy) => {
+        const textarea = document.createElement('textarea');
+        textarea.value = textToCopy;
+        document.body.appendChild(textarea);
+        textarea.select();
         try {
-            await navigator.clipboard.writeText(textToCopy);
+            document.execCommand('copy');
             message.success('复制题目成功!');
         } catch (err) {
+            console.error('复制失败的详细错误信息:', err);
             message.error('复制失败，请重试!');
         }
+        document.body.removeChild(textarea);
     };
+
+    const copyToClipboard = async (textToCopy) => {
+        if (navigator.clipboard) {
+            try {
+                await navigator.clipboard.writeText(textToCopy);
+                message.success('复制题目成功!');
+            } catch (err) {
+                console.error('复制失败的详细错误信息:', err);
+                message.error('复制失败，请重试!');
+            }
+        } else {
+            copyToClipboardFallback(textToCopy);
+        }
+    };
+
 
     // Use effect to copy text.title when the modal opens
     useEffect(() => {
