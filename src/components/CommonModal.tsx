@@ -1,5 +1,5 @@
-import React from 'react';
-import { Modal } from 'antd';
+import React, { useEffect } from 'react';
+import { Modal, message } from 'antd';
 import { ProChat } from '@ant-design/pro-chat';
 
 function CommonModal({ isModalOpen, setIsModalOpen, text }) {
@@ -11,7 +11,24 @@ function CommonModal({ isModalOpen, setIsModalOpen, text }) {
         setIsModalOpen(false);
     };
 
-    async function fetchChatResponse(messages='你好') {
+    // Function to copy text to clipboard and show a message
+    const copyToClipboard = async (textToCopy) => {
+        try {
+            await navigator.clipboard.writeText(textToCopy);
+            message.success('复制题目成功!');
+        } catch (err) {
+            message.error('复制失败，请重试!');
+        }
+    };
+
+    // Use effect to copy text.title when the modal opens
+    useEffect(() => {
+        if (isModalOpen) {
+            copyToClipboard(text.title);
+        }
+    }, [isModalOpen, text.title]);
+
+    async function fetchChatResponse(messages = '你好') {
         try {
             const params = {
                 'model': 'qwen-turbo',
@@ -49,9 +66,18 @@ function CommonModal({ isModalOpen, setIsModalOpen, text }) {
             return { error: error.message };
         }
     }
+
     return (
         <div>
-            <Modal title="你要解答什么？" okText="确定" cancelText="取消" open={isModalOpen} onOk={handleOk} onCancel={handleCancel} width={800}>
+            <Modal
+                title="你要解答什么？"
+                okText="确定"
+                cancelText="取消"
+                open={isModalOpen}
+                onOk={handleOk}
+                onCancel={handleCancel}
+                width={800}
+            >
                 <div className="h-96">
                     <ProChat
                         helloMessage={
