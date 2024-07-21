@@ -12,7 +12,7 @@ export default defineConfig({
     host: '0.0.0.0',
     proxy: {
       '/api': {
-        target: 'https://dashscope.aliyuncs.com/',
+        target: 'http://123.56.15.95:8000',
         changeOrigin: true,
         secure:false,
         rewrite: (path) => path.replace(/^\/api/, ''),

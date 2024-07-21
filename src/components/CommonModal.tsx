@@ -34,10 +34,6 @@ function CommonModal({ isModalOpen, setIsModalOpen, text }) {
 
             const response = await fetch(`${import.meta.env.VITE_API_URL}/v1/services/aigc/text-generation/generation`, {
                 method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json',
-                    'Authorization': 'Bearer sk-e7197f1582324f47b7f4fef9f88f533b'  // 使用环境变量或其他安全方法替换
-                },
                 body: JSON.stringify(params),
             });
 
