@@ -18,7 +18,7 @@ const App: React.FC = () => {
     // const routersListRef = useRef(routersList.routes);
     useEffect(() => {
         const itemDict: { [key: string]: string } = {
-            '/home': '首页',
+            // '/home': '首页',
             '/html-page': 'Html',
             '/css-page': 'Css',
             '/js-page': 'Js',
@@ -41,7 +41,7 @@ const App: React.FC = () => {
                 }
             }
         }
-        navigate('/home');
+        navigate('/html-page');
         setMenuItems([...menuData]);
     }, []) // [] 为空,只调用一次
 
@@ -79,7 +79,7 @@ const App: React.FC = () => {
                     <Menu
                         theme="light"
                         mode="horizontal"
-                        defaultSelectedKeys={['0-0']}
+                        defaultSelectedKeys={['0-1']}
                         items={menuItems}
                         style={{flex: 1, minWidth: 0}}
                         onClick={clickMenuItem}
