@@ -1,4 +1,5 @@
 import CommonTabs from "@/components/CommonTabs.tsx";
+import CommonTable from "@/components/CommonTable.tsx";
 import {App} from 'antd';
 import cssContext from '@/store/cssContext.ts';
 
@@ -15,12 +16,12 @@ function CssPage() {
     })
     return (
         <div>
-            <App>
-                <cssContext.Provider value={{'cssPropTabsList': items, cssArgTypes: '2'}}>
-                    <CommonTabs/>
-                </cssContext.Provider>
-            </App>
-            我是css页面
+            {/*<App>*/}
+            {/*    <cssContext.Provider value={{'cssPropTabsList': items, cssArgTypes: '2'}}>*/}
+            {/*        <CommonTabs/>*/}
+            {/*    </cssContext.Provider>*/}
+            {/*</App>*/}
+            <CommonTable tagId={11}/>
         </div>
     );
 }

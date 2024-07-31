@@ -4,13 +4,14 @@ import { useState, useEffect } from "react";
 import { Table, Spin } from "antd";
 import CommonModal from "@/components/CommonModal.tsx";
 
-function CommonTable() {
+function CommonTable(props) {
     const [dataSource, setDataSource] = useState([]);
     const [totalCount, setTotalCount] = useState(0);
     const [pagination, setPagination] = useState({
         current: 1,
         pageSize: 10,
     });
+    const { tagId } = props;
     const [loading, setLoading] = useState(true);
     const [modalVisible, setModalVisible] = useState({});  // 使用一个对象来跟踪每行的模态对话框状态
 
@@ -82,7 +83,7 @@ function CommonTable() {
         setLoading(true); // 请求开始前设置loading状态
         const params = {
             vid: 9,
-            tagId: 12,
+            tagId: tagId,
             pageNum: page,
             pageSize: pageSize,
             orderBy: 'updateTime',

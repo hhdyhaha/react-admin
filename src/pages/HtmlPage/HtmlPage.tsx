@@ -14,7 +14,7 @@ function HtmlPage() {
     })
     return (
         <div>
-            <CommonTable />
+            <CommonTable tagId={12} />
         </div>
     )
 }
