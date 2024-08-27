@@ -107,72 +107,72 @@ const CopyPage = () => {
     };
 
     return (
-        <div className="p-4 max-w-3xl mx-auto">
-            <h2 className="text-2xl font-bold mb-4">深拷贝和浅拷贝演示</h2>
+        <div className=" h-5/6 overflow-auto">
+                <h2 className="text-2xl font-bold mb-4">深拷贝和浅拷贝演示</h2>
 
-            <div className="grid grid-cols-3 gap-4 mb-4">
-                <div>
-                    <h3 className="font-bold mb-2">原始对象</h3>
-                    <pre className="bg-gray-100 p-2 rounded text-sm">
+                <div className="grid grid-cols-3 gap-4 mb-4">
+                    <div>
+                        <h3 className="font-bold mb-2">原始对象</h3>
+                        <pre className="bg-gray-100 p-2 rounded text-sm">
             {JSON.stringify(originalObject, null, 2)}
           </pre>
-                </div>
-                <div>
-                    <h3 className="font-bold mb-2">浅拷贝</h3>
-                    <pre className="bg-gray-100 p-2 rounded text-sm">
+                    </div>
+                    <div>
+                        <h3 className="font-bold mb-2">浅拷贝</h3>
+                        <pre className="bg-gray-100 p-2 rounded text-sm">
             {shallowCopy ? JSON.stringify(shallowCopy, null, 2) : "尚未创建"}
           </pre>
-                </div>
-                <div>
-                    <h3 className="font-bold mb-2">深拷贝</h3>
-                    <pre className="bg-gray-100 p-2 rounded text-sm">
+                    </div>
+                    <div>
+                        <h3 className="font-bold mb-2">深拷贝</h3>
+                        <pre className="bg-gray-100 p-2 rounded text-sm">
             {deepCopy ? JSON.stringify(deepCopy, null, 2) : "尚未创建"}
           </pre>
+                    </div>
                 </div>
-            </div>
 
-            <div className="grid grid-cols-2 gap-4 mb-4">
-                <div>
-                    <button
-                        onClick={performShallowCopy}
-                        className="bg-blue-500 text-white p-2 rounded hover:bg-blue-600 w-full mb-2"
-                    >
-                        执行浅拷贝
-                    </button>
-                    <button
-                        onClick={modifyShallowCopy}
-                        className="bg-green-500 text-white p-2 rounded hover:bg-green-600 w-full"
-                        disabled={!shallowCopy}
-                    >
-                        修改浅拷贝
-                    </button>
+                <div className="grid grid-cols-2 gap-4 mb-4">
+                    <div>
+                        <button
+                            onClick={performShallowCopy}
+                            className="bg-blue-500 text-white p-2 rounded hover:bg-blue-600 w-full mb-2"
+                        >
+                            执行浅拷贝
+                        </button>
+                        <button
+                            onClick={modifyShallowCopy}
+                            className="bg-green-500 text-white p-2 rounded hover:bg-green-600 w-full"
+                            disabled={!shallowCopy}
+                        >
+                            修改浅拷贝
+                        </button>
+                    </div>
+                    <div>
+                        <button
+                            onClick={performDeepCopy}
+                            className="bg-purple-500 text-white p-2 rounded hover:bg-purple-600 w-full mb-2"
+                        >
+                            执行深拷贝
+                        </button>
+                        <button
+                            onClick={modifyDeepCopy}
+                            className="bg-pink-500 text-white p-2 rounded hover:bg-pink-600 w-full"
+                            disabled={!deepCopy}
+                        >
+                            修改深拷贝
+                        </button>
+                    </div>
                 </div>
-                <div>
-                    <button
-                        onClick={performDeepCopy}
-                        className="bg-purple-500 text-white p-2 rounded hover:bg-purple-600 w-full mb-2"
-                    >
-                        执行深拷贝
-                    </button>
-                    <button
-                        onClick={modifyDeepCopy}
-                        className="bg-pink-500 text-white p-2 rounded hover:bg-pink-600 w-full"
-                        disabled={!deepCopy}
-                    >
-                        修改深拷贝
-                    </button>
-                </div>
-            </div>
 
-            <div className="mt-4">
-                <h3 className="font-bold">说明：</h3>
-                <ul className="list-disc list-inside">
-                    <li>浅拷贝：只复制对象的第一层属性，嵌套对象仍然共享引用</li>
-                    <li>深拷贝：递归复制对象的所有层级，创建完全独立的副本</li>
-                    <li>修改拷贝后，观察原始对象和拷贝对象的变化，以理解两种拷贝的区别</li>
-                </ul>
+                <div className="mt-4">
+                    <h3 className="font-bold">说明：</h3>
+                    <ul className="list-disc list-inside">
+                        <li>浅拷贝：只复制对象的第一层属性，嵌套对象仍然共享引用</li>
+                        <li>深拷贝：递归复制对象的所有层级，创建完全独立的副本</li>
+                        <li>修改拷贝后，观察原始对象和拷贝对象的变化，以理解两种拷贝的区别</li>
+                    </ul>
+                </div>
             </div>
-        </div>
     );
 };
 

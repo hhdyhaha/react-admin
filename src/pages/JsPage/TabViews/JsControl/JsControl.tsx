@@ -133,7 +133,7 @@ function JsControl() {
             </div>
             <Input placeholder="请输入数组的内容,逗号分隔" onChange={handleInput}/>
             <ChangeArray oldArr={newArr} updateOldArr={updateOld}/>
-            <NoChangeArray/>
+            {/*<NoChangeArray/>*/}
         </>
     );
 }

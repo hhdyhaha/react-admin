@@ -13,7 +13,7 @@ function HtmlPage() {
         };
     })
     return (
-        <div>
+        <div className={"h-full"}>
             <CommonTable tagId={12} />
         </div>
     )

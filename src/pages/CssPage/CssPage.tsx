@@ -15,7 +15,7 @@ function CssPage() {
         };
     })
     return (
-        <div>
+        <div className={"h-full"}>
             {/*<App>*/}
             {/*    <cssContext.Provider value={{'cssPropTabsList': items, cssArgTypes: '2'}}>*/}
             {/*        <CommonTabs/>*/}

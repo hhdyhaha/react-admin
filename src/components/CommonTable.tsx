@@ -115,7 +115,7 @@ function CommonTable(props) {
     };
 
     return (
-        <div>
+        <div className={"h-full overflow-auto"}>
             <Spin spinning={loading}>
                 <Table
                     dataSource={dataSource}
